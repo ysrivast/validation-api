@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ValidationController {
 
     private final ValidationService validationService;
+    @GetMapping("/health")
+    public ResponseEntity<String> health(){
+        log.info("GET API invoked : health");
+        return ResponseEntity.ok("up...");
+    }
     @GetMapping("/pdf")
     public ResponseEntity<String> pdfParse(){
         StopWatch stopWatch = new StopWatch();
