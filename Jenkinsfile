@@ -16,16 +16,6 @@ pipeline {
                 sh './mvnw clean package'
             }
         }
-        stage('Deploy to EC2') {
-            steps {
-                sshagent(['${SSH_CREDENTIALS_ID}']) {
-                    sh """
-                    scp -o StrictHostKeyChecking=no target/yourapp.jar ec2-user@${EC2_IP}:/home/ec2-user/
-                    ssh -o StrictHostKeyChecking=no ec2-user@${EC2_IP} 'nohup java -jar /home/ec2-user/yourapp.jar &'
-                    """
-                }
-            }
-        }
     }
     post {
         always {
