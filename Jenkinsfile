@@ -16,6 +16,12 @@ pipeline {
                 sh './mvnw clean package'
             }
         }
+        stage('Build') {
+            steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
+                sh './mvnw spring-boot:run -Dserver.port=8081'
+            }
+        }
     }
     post {
         always {
